@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Content Creation</title>
+</head>
+<body>
+  <div id="dynamicContent"></div>
+
+  <script>
+    const dynamicContentDiv = document.getElementById("dynamicContent");
+
+    for (let i = 0; i < 5; i++) {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = "This is  Debbale Softwares " + (i + 1);
+      dynamicContentDiv.appendChild(paragraph);
+    }
+  </script>
+</body>
+</html>
