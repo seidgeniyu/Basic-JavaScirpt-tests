@@ -10,10 +10,10 @@ try {
   const result = divide(20, 4);
   console.log(result);
 } catch (error) {
-  console.error(error.message); //output:"division by zero is not allowed"
+  console.error(error.message); //Output:"division by zero is not allowed"
 }
 try {
   const result = divide(10, 0); //this will throw error
 } catch (error) {
-  console.error(error.message); //output:"division by zero is not allowed "
+  console.error(error.message); //Output:"division by zero is not allowed "
 }
