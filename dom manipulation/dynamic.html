@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      label {
+        font-size: 14px;
+        padding: 4px;
+      }
+      input {
+        padding: 2px;
+        margin: 4px 0px;
+      }
+      .error-msg {
+        color: red;
+        font-size: 12px;
+        
+      }
+      .divAll{
+        margin-left: 100px;
+        margin-right:100px;
+        margin-top: 100px;
+        height: 70vh;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: whitesmoke;
+      }
+      #submit{
+        cursor: pointer;
+      }
+      #showButton{
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="divAll">
+    <div>
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" />
+      <p id="usernameError" class="error-msg"></p>
+    </div>
+    
+    <div class="btn">
+      <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+        <p id="passwordError" class="error-msg"></p>
+        <button onclick="showPasswordClick()" id="showButton">
+          show password
+        </button>
+      </div>
+      <br>
+      <div>
+        <button id="submit">Submit</button>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px">
+      <table>
+        <thead>
+          <th>Username</th>
+          <th>password</th>
+          <th>action</th>
+        </thead>
+        <tbody id="tableBody">
+          <tr id="1">
+            <td id="1Username">Abdulj</td>
+            <td>pass123</td>
+            <td>
+              <button
+                style="
+                  background-color: rgb(173, 169, 169);
+                  color: black;
+                  padding: 2px;
+                  margin: 2px;
+                  border-style: none;
+                  border-radius: 3px;
+                  cursor: pointer;
+                "
+              >
+                Edit
+              </button>
+              <button
+                style="
+                  background-color: red;
+                  color: white;
+                  padding: 2px;
+                  margin: 2px;
+                  border-style: none;
+                  border-radius: 3px;
+                  cursor: pointer;
+                "
+                onclick="deleteItem('1')"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+    <script>
+      const showButton = document.getElementById("showButton");
+      const passwordInput = document.getElementById("password");
+      const usernameInput = document.getElementById("username");
+
+      const usernameError = document.getElementById("usernameError");
+      const passwordError = document.getElementById("passwordError");
+
+      const tableBody = document.getElementById("tableBody");
+      let isValid = false;
+      let id = 2;
+      let isEdit = false;
+      let activeId = 2;
+
+      function deleteItem(id) {
+        const item = document.getElementById(id);
+        item.remove();
+      }
+
+      function editItem(id) {
+        isEdit = true;
+        activeId = id;
+        const itemUser = document.getElementById(`${id}Username`);
+        const itemPass = itemUser.nextElementSibling;
+        usernameInput.value = itemUser.textContent;
+        passwordInput.value = itemPass.textContent;
+      }
+
+      function submitData() {
+        const newRow = document.createElement("tr");
+        newRow.id = id;
+        newRow.innerHTML = `
+          <td id="${id}Username">${usernameInput.value}</td>
+          <td>${passwordInput.value}</td>
+          <td>
+            <button class="btn1" onclick="editItem('${id}')">Edit</button>
+            <button class="btn2" onclick="deleteItem('${id}')">Delete</button>
+          </td>`;
+        tableBody.appendChild(newRow);
+        id++;
+        usernameInput.value = "";
+        passwordInput.value = "";
+      }
+
+      function editSubmitData() {
+        const itemUser = document.getElementById(`${activeId}Username`);
+        const itemPass = itemUser.nextElementSibling;
+        itemUser.textContent = usernameInput.value;
+        itemPass.textContent = passwordInput.value;
+        isEdit = false;
+        activeId = null;
+        usernameInput.value = "";
+        passwordInput.value = "";
+      }
+
+      usernameInput.addEventListener("keyup", (event) => {
+        console.log("text : ", usernameInput.value);
+        if (usernameInput.value.length < 4) {
+          isValid = false;
+          usernameError.innerText = "username must be greater than 4 character";
+        } else {
+          isValid = true;
+          usernameError.innerText = "";
+        }
+      });
+
+      passwordInput.addEventListener("keyup", (event) => {
+        console.log("text : ", passwordInput.value);
+        if (passwordInput.value.length < 4) {
+          isValid = false;
+          passwordError.innerText = "password must be greater than 4 character";
+        } else {
+          isValid = true;
+          passwordError.innerText = "";
+        }
+      });
+
+      document.getElementById("submit").addEventListener("click", (event) => {
+        console.log("inValid : ", isValid);
+        if (isValid) {
+          if (isEdit) {
+            editSubmitData();
+            return;
+          }
+          submitData();
+        }
+      });
+
+      function showPasswordClick() {
+        const buttonText = showButton.innerText;
+        if (buttonText == "show password") {
+          passwordInput.type = "text";
+          showButton.innerText = "hide password";
+        } else {
+          passwordInput.type = "password";
+          showButton.innerText = "show password";
+        }
+      }
+    </script>
+  </body>
+</html>
