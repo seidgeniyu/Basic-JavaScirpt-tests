@@ -10,6 +10,9 @@
         margin: 0;
         padding: 0;
       }
+      body{
+        color: white;
+      }
       label {
         font-size: 14px;
         padding: 4px;
@@ -24,8 +27,8 @@
         
       }
       .divAll{
-        margin-left: 100px;
-        margin-right:100px;
+        margin-left: 200px;
+        margin-right:200px;
         margin-top: 100px;
         height: 70vh;
         border-radius: 12px;
@@ -33,7 +36,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        background-color: whitesmoke;
+        background-color:rgb(14, 12, 143);
       }
       #submit{
         cursor: pointer;
@@ -48,14 +51,14 @@
     <div class="divAll">
     <div>
       <label for="username">Username</label>
-      <input type="text" name="username" id="username" />
+      <input type="text" name="username" id="username" style="outline: none;"/>
       <p id="usernameError" class="error-msg"></p>
     </div>
     
     <div class="btn">
       <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" />
+        <label for="password" >Password</label>
+        <input type="password" name="password" id="password" style="outline: none;" />
         <p id="passwordError" class="error-msg"></p>
         <button onclick="showPasswordClick()" id="showButton">
           show password
@@ -68,7 +71,7 @@
     </div>
 
     <div style="margin-top: 20px">
-      <table>
+      <table style="border: 1px solid ">
         <thead>
           <th>Username</th>
           <th>password</th>
@@ -81,8 +84,8 @@
             <td>
               <button
                 style="
-                  background-color: rgb(173, 169, 169);
-                  color: black;
+                  background-color: green;
+                  color: white;
                   padding: 2px;
                   margin: 2px;
                   border-style: none;
